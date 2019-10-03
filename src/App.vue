@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-        <titulo></titulo>
+        <button @click="mostrarTitulo = false">Destruir titulo</button>
+        <titulo v-if="mostrarTitulo"></titulo>
         <div class="row">
             <div class="col-md-12">
                 <novo-jogo :times="times"></novo-jogo>
@@ -32,6 +33,7 @@ export default {
   data(){
 
       return {
+          mostrarTitulo: true,
           times: [],
           timeCasa: null,
           timeFora: null,
