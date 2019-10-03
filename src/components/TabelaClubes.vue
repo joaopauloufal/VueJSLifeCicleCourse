@@ -1,29 +1,34 @@
 <template>
     <div>
-        <input type="text" class="form-control" v-model="busca">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th v-for="(coluna, indice) in ordem.colunas" v-bind:key="coluna">
-                        <a href="#" @click.prevent="ordenar(indice)">{{coluna | ucwords}}</a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(time, indice) in timesFiltrados" :class="{'table-success':indice < 6}" :style="{'font-size': indice < 6 ? '17px' : '15px'}">
-                    <td>
-                    <clube :time="time"></clube>                           
-                    </td>
-                    <td>{{time.pontos}}</td>
-                    <td>{{time.gm}}</td>
-                    <td>{{time.gs}}</td>
-                    <td>{{time.saldo}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <clubes-libertadores :times="timesOrdered"></clubes-libertadores>
-        <clubes-rebaixados :times="timesOrdered"></clubes-rebaixados>
+        <div v-if="loading">
+            Carregando...
+        </div>
+        <div v-else>
+            <input type="text" class="form-control" v-model="busca">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th v-for="(coluna, indice) in ordem.colunas" v-bind:key="coluna">
+                            <a href="#" @click.prevent="ordenar(indice)">{{coluna | ucwords}}</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(time, indice) in timesFiltrados" :class="{'table-success':indice < 6}" :style="{'font-size': indice < 6 ? '17px' : '15px'}">
+                        <td>
+                        <clube :time="time"></clube>                           
+                        </td>
+                        <td>{{time.pontos}}</td>
+                        <td>{{time.gm}}</td>
+                        <td>{{time.gs}}</td>
+                        <td>{{time.saldo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <clubes-libertadores :times="timesOrdered"></clubes-libertadores>
+            <clubes-rebaixados :times="timesOrdered"></clubes-rebaixados>
+        </div> 
     </div>
 </template>
 
@@ -40,7 +45,12 @@ export default {
     name: 'tabela-clubes',
 
     created(){
-        getTimes.then(times => this.times = times);
+        getTimes.then(times => {
+                this.times = times;
+            })
+            .finally(() => this.loading = false);
+
+            window.console.log(this.times);
     },
 
     components: {
@@ -50,6 +60,7 @@ export default {
     data(){
 
         return {
+            loading: true,
             busca : '',
             ordem : {
                 colunas : ['pontos', 'gm', 'gs', 'saldo'],

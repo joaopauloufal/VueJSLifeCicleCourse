@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" @click="criarNovoJogo">
+        <button type="button" class="btn btn-primary" @click="criarNovoJogo" :disabled="loading">
             Novo Jogo
         </button>
         <placar-modal :time-casa="timeCasa" :time-fora="timeFora" ref="modal"></placar-modal>
@@ -9,11 +9,22 @@
 
 <script>
 
-import PlacarModal from './PlacarModal.vue'
+import PlacarModal from './PlacarModal.vue';
+import getTimes from '../get-times';
+
 
 export default {
 
     name: 'novo-jogo',
+
+    created(){
+        getTimes.then(times => {
+                this.times = times;
+            })
+            .finally(() => this.loading = false);
+
+            window.console.log(this.times);
+    },
 
     components: {
         PlacarModal
@@ -22,9 +33,11 @@ export default {
 
     data(){
         return {
+            loading: true,
             timeCasa: null,
             timeFora: null,
-            times: this.timesColecao
+            //times: this.timesColecao
+            times: []
         }
     },
     //props: ['times'],
@@ -42,8 +55,8 @@ export default {
             //var timeCasa = this.timesColecao[indiceCasa];
             //var timeFora = this.timesColecao[indiceFora];
 
-            this.timeCasa = this.timesColecao[indiceCasa];
-            this.timeFora = this.timesColecao[indiceFora];
+            this.timeCasa = this.times[indiceCasa];
+            this.timeFora = this.times[indiceFora];
 
             var modal = this.$refs.modal;
             window.console.log(modal);
