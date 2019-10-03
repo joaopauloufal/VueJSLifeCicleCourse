@@ -16,35 +16,38 @@ export default {
         },
 
         beforeCreate(){
-            window.console.log('beforeCreate');
+            // Criar coisas no this
+            // Verificar se o usuario está autenticado para definir configurações
+            // Verificar informacoes no localstorage
+            window.console.log(Object.assign({}, this),'beforeCreate');
         },
 
         created(){
-            window.console.log('created');
+            window.console.log(Object.assign({}, this),'created');
         },
 
         beforeMount(){
-            window.console.log('beforeMount');
+            window.console.log(Object.assign({}, this),'beforeMount');
         },
 
         mounted(){
-            window.console.log('mounted');
+            window.console.log(Object.assign({}, this),'mounted');
         },
 
         beforeUpdate(){
-            window.console.log('beforeUpdate');
+            window.console.log(Object.assign({}, this),'beforeUpdate');
         },
 
         updated(){
-            window.console.log('updated');
+            window.console.log(Object.assign({}, this),'updated');
         },
 
         beforeDestroy(){
-            window.console.log('beforeDestroy');
+            window.console.log(Object.assign({}, this),'beforeDestroy');
         },
 
         destroyed(){
-            window.console.log('destroyed');
+            window.console.log(Object.assign({}, this),'destroyed');
         },
 
     methods: {
