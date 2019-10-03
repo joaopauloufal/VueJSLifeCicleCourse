@@ -11,7 +11,8 @@ export default {
 
         data(){
             return {
-                nome: 'João Paulo'
+                nome: 'João Paulo',
+                variavel: null
             }
         },
 
@@ -23,6 +24,7 @@ export default {
         },
 
         created(){
+            //this.variavel = new Date();
             window.console.log(Object.assign({}, this),'created');
         },
 

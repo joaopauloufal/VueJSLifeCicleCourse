@@ -29,7 +29,8 @@
 
 <script>
 
-import _ from 'lodash'
+import _ from 'lodash';
+import getTimes from '../get-times';
 import Clube from './Clube';
 import ClubesLibertadores from './ClubesLibertadores.vue';
 import ClubesRebaixados from './ClubesRebaixados.vue';
@@ -37,6 +38,10 @@ import ClubesRebaixados from './ClubesRebaixados.vue';
 export default {
 
     name: 'tabela-clubes',
+
+    created(){
+        getTimes.then(times => this.times = times);
+    },
 
     components: {
         ClubesLibertadores, ClubesRebaixados, Clube
@@ -50,7 +55,8 @@ export default {
                 colunas : ['pontos', 'gm', 'gs', 'saldo'],
                 orientacao : ['desc', 'desc', 'asc', 'desc']
             },
-            times: this.timesColecao
+            //times: this.timesColecao
+            times: []
         }
 
     },
@@ -61,9 +67,9 @@ export default {
 
         timesFiltrados(){
             window.console.log('ordenou', this.ordem);
-            var times = _.orderBy(this.timesColecao, this.ordem.colunas, this.ordem.orientacao);
+            //var times = _.orderBy(this.timesColecao, this.ordem.colunas, this.ordem.orientacao);
             var self = this;
-            return _.filter(times, function(time){
+            return _.filter(this.timesOrdered, function(time){
                 var busca = self.busca.toLowerCase();
                 return time.nome.toLowerCase().indexOf(busca) >= 0;
             });
@@ -72,7 +78,7 @@ export default {
         timesOrdered(){
 
            //return _.orderBy(this.times, this.ordem.colunas, this.ordem.orientacao);
-           return _.orderBy(this.timesColecao, this.ordem.colunas, this.ordem.orientacao);
+           return _.orderBy(this.times, this.ordem.colunas, this.ordem.orientacao);
 
         }
 
