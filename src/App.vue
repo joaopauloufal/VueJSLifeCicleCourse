@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
         <button @click="mostrarTitulo = false">Destruir titulo</button>
-        <titulo v-if="mostrarTitulo"></titulo>
+        <titulo v-if="mostrarTitulo" id="teste" teste="João"></titulo>
         <div class="row">
             <div class="col-md-12">
                 <novo-jogo :times="times"></novo-jogo>
@@ -29,6 +29,8 @@ export default {
   components: {
     Titulo, NovoJogo, TabelaClubes
   },
+
+  props: ['teste'],
 
   data(){
 
