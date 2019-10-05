@@ -1,14 +1,26 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import Vue from 'vue'
 import App from './App.vue'
 import Time from './time.js'
 
-import $ from 'jquery';
-import PooperJs from 'popper.js';
+// import $ from 'jquery';
+// import PooperJs from 'popper.js';
 
+
+// require('bootstrap/dist/css/bootstrap.min.css');
+// window.jQuery = window.$ = $;
+// window.Pooper = PooperJs;
+// require('bootstrap');
+
+// import $ from 'jquery';
+// import PooperJs from 'popper.js';
+
+
+require('materialize-css/dist/css/materialize.min.css');
+import $ from 'jquery';
 window.jQuery = window.$ = $;
-window.Pooper = PooperJs;
-require('bootstrap');
+window.M = require('materialize-css');
+
 
 Vue.config.productionTip = false
 
