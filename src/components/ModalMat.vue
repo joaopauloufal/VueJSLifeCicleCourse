@@ -19,6 +19,14 @@ export default {
         window.$(this.$el).modal();
     },
 
+    beforeDestroy(){
+        this.getModal().destroy();
+        window.console.log('Destruindo modal...');
+    },
+
+    destroyed(){
+        window.console.log('Modal destruído');
+    },
 
     data(){
 
