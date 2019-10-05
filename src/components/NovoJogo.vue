@@ -3,13 +3,13 @@
         <button type="button" class="btn btn-primary" @click="criarNovoJogo" :disabled="loading">
             Novo Jogo
         </button>
-        <placar-modal :time-casa="timeCasa" :time-fora="timeFora" ref="modal"></placar-modal>
+        <placar-modal-mat :time-casa="timeCasa" :time-fora="timeFora" ref="modal"></placar-modal-mat>
     </div>
 </template>
 
 <script>
 
-import PlacarModal from './PlacarModal.vue';
+import PlacarModalMat from './PlacarModalMat.vue';
 import getTimes from '../get-times';
 
 
@@ -27,7 +27,7 @@ export default {
     },
 
     components: {
-        PlacarModal
+        PlacarModalMat
     },
     
 
